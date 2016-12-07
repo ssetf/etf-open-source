@@ -16,3 +16,4 @@ Windows Desktop GitHub aplikacija može se preuzeti na sledećem linku https://d
 
 Tutorijal za Windows Desktop početnike na engleskom jeziku - https://www.youtube.com/watch?v=BKr8lbx3uFY
 ### Savez Studenata Elektrotehničkog Fakulteta
+![alt text](http://i68.tinypic.com/2rw9pbd.jpg "Make ETF Great Again!")
