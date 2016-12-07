@@ -13,5 +13,6 @@ Za ostvarenje tog cilja potrebno je da se što više ljudi uključi i doprinosi 
 
 
 Windows Desktop GitHub aplikacija može se preuzeti na sledećem linku https://desktop.github.com/
+
 Tutorijal za Windows Desktop početnike na engleskom jeziku - https://www.youtube.com/watch?v=BKr8lbx3uFY
 ### Savez Studenata Elektrotehničkog Fakulteta
