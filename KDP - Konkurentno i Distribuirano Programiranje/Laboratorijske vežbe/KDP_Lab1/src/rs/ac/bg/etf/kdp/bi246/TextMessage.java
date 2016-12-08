@@ -4,6 +4,7 @@ public class TextMessage implements Message<String>
 {
 	String txtmsg;
 	long id;
+	long ttl;
 
 	@Override
 	public void setBody(String body)
@@ -28,6 +29,18 @@ public class TextMessage implements Message<String>
 	public long getId()
 	{
 		return id;
+	}
+
+	@Override
+	public long getTTL()
+	{
+		return ttl;
+	}
+
+	@Override
+	public void setTTL(long ttl)
+	{
+		this.ttl = ttl;
 	}
 
 }

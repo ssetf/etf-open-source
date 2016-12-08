@@ -6,4 +6,6 @@ public interface Message<T>
 	public T getBody();
 	public void setId(long id);
 	public long getId();
+	public long getTTL();
+	public void setTTL(long ttl);
 }
