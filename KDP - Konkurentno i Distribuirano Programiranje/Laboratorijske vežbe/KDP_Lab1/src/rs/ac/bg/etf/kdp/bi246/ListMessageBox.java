@@ -51,8 +51,9 @@ public class ListMessageBox<T> implements MessageBox<T>
 				long currTime = System.currentTimeMillis();
 				if ((currTime - requestTime) > timeToWait && timeToWait != 0)
 				{
+					status.setStatus(1);
 					return null;
-					// TODO status
+					
 				}
 				long waitFor = (timeToWait + requestTime) - currTime;
 				if (waitFor > 0)
@@ -66,6 +67,7 @@ public class ListMessageBox<T> implements MessageBox<T>
 		}
 		msg = buffer.remove(0);
 		notifyAll();
+		status.setStatus(0);
 		return msg;
 	}
 

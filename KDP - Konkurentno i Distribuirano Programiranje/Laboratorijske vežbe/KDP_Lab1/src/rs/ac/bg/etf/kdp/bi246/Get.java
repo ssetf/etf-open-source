@@ -64,11 +64,12 @@ public class Get extends JFrame
 							longttl = 0;
 						}
 						ttl.setText("");
-						Message<String> msg = buffer.receive(longttl, null);
+						IntStatus status = new IntStatus();
+						Message<String> msg = buffer.receive(longttl, status);
 						if(msg != null)
-							txt.setText(msg.getBody());
+							txt.setText(status.getMessage() + ":\n"+msg.getBody());
 						else
-							txt.setText("Time to wait exceeded");
+							txt.setText(status.getMessage());
 					}
 				};
 				t.start();
