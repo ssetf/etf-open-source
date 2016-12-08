@@ -45,6 +45,7 @@ public class Get extends JFrame
 		ttllabel.setBackground(Color.white);
 		ttllabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ttllabel.setPreferredSize(new Dimension(100, 25));
+		
 		btn.addActionListener(new ActionListener()
 		{
 			@Override

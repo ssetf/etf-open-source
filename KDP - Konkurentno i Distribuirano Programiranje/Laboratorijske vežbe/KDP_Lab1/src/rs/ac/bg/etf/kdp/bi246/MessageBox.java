@@ -4,4 +4,5 @@ public interface MessageBox<T>
 {
 	public void send(Message<T> msg, Priority prior, long timeToLive);
 	public Message<T> receive(long timeToWait, Status status);
+	public void update();
 }

@@ -8,4 +8,6 @@ public interface Message<T>
 	public long getId();
 	public long getTTL();
 	public void setTTL(long ttl);
+	public long getTimeSent();
+	public void setTimeSent(long timeSent);
 }

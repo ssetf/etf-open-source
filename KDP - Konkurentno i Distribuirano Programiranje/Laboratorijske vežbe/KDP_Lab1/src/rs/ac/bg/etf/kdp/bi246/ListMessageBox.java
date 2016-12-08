@@ -30,6 +30,8 @@ public class ListMessageBox<T> implements MessageBox<T>
 			}
 		}
 		notifyAll();
+		msg.setTTL(timeToLive);
+		msg.setTimeSent(System.currentTimeMillis());
 		buffer.add(msg);
 	}
 
@@ -37,11 +39,19 @@ public class ListMessageBox<T> implements MessageBox<T>
 	public synchronized Message<T> receive(long timeToWait, Status status)
 	{
 		Message<T> msg = null;
+		long requestTime = System.currentTimeMillis();
 		while (buffer.size() == 0)
 		{
 			try
 			{
-				wait();
+				long currTime = System.currentTimeMillis();
+				if ((currTime - requestTime) > timeToWait && timeToWait != 0)
+				{
+					return null;
+					// TODO status
+				}
+				long waitFor = (timeToWait + requestTime) - currTime;
+				wait(waitFor);
 			} catch (Exception e)
 			{
 				e.printStackTrace();
@@ -50,5 +60,18 @@ public class ListMessageBox<T> implements MessageBox<T>
 		msg = buffer.remove(0);
 		notifyAll();
 		return msg;
+	}
+
+	@Override
+	public void update()
+	{
+		for (Message<T> msg : buffer)
+		{
+			long currTime = System.currentTimeMillis();
+			if ((currTime - msg.getTimeSent()) > msg.getTTL() && msg.getTTL() != 0)
+			{
+				buffer.remove(msg);
+			}
+		}
 	}
 }

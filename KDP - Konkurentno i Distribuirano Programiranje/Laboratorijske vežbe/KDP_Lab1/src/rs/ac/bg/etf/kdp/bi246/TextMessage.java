@@ -5,6 +5,7 @@ public class TextMessage implements Message<String>
 	String txtmsg;
 	long id;
 	long ttl;
+	long timeSent;
 
 	@Override
 	public void setBody(String body)
@@ -41,6 +42,20 @@ public class TextMessage implements Message<String>
 	public void setTTL(long ttl)
 	{
 		this.ttl = ttl;
+	}
+
+	@Override
+	public long getTimeSent()
+	{
+		
+		return timeSent;
+	}
+
+	@Override
+	public void setTimeSent(long timeSent)
+	{
+		this.timeSent = timeSent;
+		
 	}
 
 }
