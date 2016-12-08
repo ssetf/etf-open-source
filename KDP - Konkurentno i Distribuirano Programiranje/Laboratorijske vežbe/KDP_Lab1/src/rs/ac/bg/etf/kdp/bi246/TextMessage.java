@@ -6,6 +6,7 @@ public class TextMessage implements Message<String>
 	long id;
 	long ttl;
 	long timeSent;
+	long prior;
 
 	@Override
 	public void setBody(String body)
@@ -47,7 +48,7 @@ public class TextMessage implements Message<String>
 	@Override
 	public long getTimeSent()
 	{
-		
+
 		return timeSent;
 	}
 
@@ -55,7 +56,30 @@ public class TextMessage implements Message<String>
 	public void setTimeSent(long timeSent)
 	{
 		this.timeSent = timeSent;
-		
+
+	}
+
+	@Override
+	public void setPriority(long priority)
+	{
+		prior = priority;
+	}
+
+	@Override
+	public int compareTo(Priority o)
+	{
+		if (prior < o.getPriority())
+			return -1;
+		else if (prior == o.getPriority())
+			return 0;
+		else
+			return 1;
+	}
+
+	@Override
+	public long getPriority()
+	{
+		return prior;
 	}
 
 }

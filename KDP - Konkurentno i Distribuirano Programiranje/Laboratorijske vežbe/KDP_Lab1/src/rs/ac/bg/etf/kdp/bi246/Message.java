@@ -1,6 +1,6 @@
 package rs.ac.bg.etf.kdp.bi246;
 
-public interface Message<T>
+public interface Message<T> extends Priority
 {
 	public void setBody(T body);
 	public T getBody();

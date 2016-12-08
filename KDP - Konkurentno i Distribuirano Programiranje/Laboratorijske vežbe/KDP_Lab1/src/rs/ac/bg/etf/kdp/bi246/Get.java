@@ -78,7 +78,7 @@ public class Get extends JFrame
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(2, 1));
-		this.setBounds(700, 400, 300, 300);
+		this.setBounds(900, 400, 300, 300);
 		JPanel pan1 = new JPanel();
 		pan1.setLayout(new GridLayout(2, 1));
 		JPanel pan2 = new JPanel();

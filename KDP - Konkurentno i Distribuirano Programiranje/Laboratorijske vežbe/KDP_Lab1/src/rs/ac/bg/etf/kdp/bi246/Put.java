@@ -19,32 +19,36 @@ public class Put extends JFrame
 	private static final long serialVersionUID = 1L;
 	private JTextArea txt;
 	private JTextArea ttl;
+	private JTextArea pri;
 	private JButton btn;
 	private JLabel txtlabel;
 	private JLabel ttllabel;
+	private JLabel prilabel;
 
+	private void createLabel(JLabel label)
+	{
+		label.setOpaque(true);
+		label.setBackground(Color.white);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setPreferredSize(new Dimension(100, 25));
+	}
 	public Put(MessageBox<String> buffer)
 	{
 		super("PUT");
 		this.buffer = buffer;
-		this.txt = new JTextArea();
 		this.btn = new JButton("PUT");
+		this.txt = new JTextArea();
 		this.ttl = new JTextArea();
+		this.pri = new JTextArea();
 		this.txtlabel = new JLabel("Message input");
 		this.ttllabel = new JLabel("Time To Live");
+		this.prilabel = new JLabel("Priority");
 		
+		
+		createLabel(txtlabel);
+		createLabel(ttllabel);
+		createLabel(prilabel);
 		btn.setPreferredSize(new Dimension(150,50));
-		
-		txtlabel.setOpaque(true);
-		txtlabel.setBackground(Color.white);
-		txtlabel.setHorizontalAlignment(SwingConstants.CENTER);
-		txtlabel.setPreferredSize(new Dimension(100, 25));
-		
-		ttllabel.setOpaque(true);
-		ttllabel.setBackground(Color.white);
-		ttllabel.setHorizontalAlignment(SwingConstants.CENTER);
-		ttllabel.setPreferredSize(new Dimension(100, 25));
-		
 		btn.addActionListener(new ActionListener()
 		{
 			@Override
@@ -64,10 +68,20 @@ public class Put extends JFrame
 						{
 							longttl = 0;
 						}
+						long prior;
+						try
+						{
+							prior = Long.parseLong(pri.getText());
+						} catch (NumberFormatException e)
+						{
+							prior = 0;
+						}
 						msg.setTTL(longttl);
+						msg.setPriority(prior);
 						txt.setText("");
 						ttl.setText("");
-						buffer.send(msg, null, longttl);
+						pri.setText("");
+						buffer.send(msg, longttl);
 					}
 				};
 				t.start();
@@ -77,14 +91,14 @@ public class Put extends JFrame
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout(2,1));
-		this.setBounds(400, 400, 300, 300);
+		this.setBounds(400, 400, 500, 300);
 		JPanel pan1 = new JPanel();
 		pan1.setLayout(new GridLayout(2,1));
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
 		JPanel pan4 = new JPanel();
-		pan2.setLayout(new FlowLayout(FlowLayout.CENTER,15,30));
-		GridLayout gridL = new GridLayout(1,2);
+		pan2.setLayout(new FlowLayout(FlowLayout.CENTER,60,30));
+		GridLayout gridL = new GridLayout(1,3);
 		gridL.setHgap(15);
 		pan3.setLayout(gridL);
 		pan4.setLayout(new FlowLayout(FlowLayout.CENTER,0,70));
@@ -92,10 +106,11 @@ public class Put extends JFrame
 		this.add(pan4);
 		pan2.add(txtlabel);
 		pan2.add(ttllabel);
+		pan2.add(prilabel);
 
 		pan3.add(txt);
 		pan3.add(ttl);
-
+		pan3.add(pri);
 		pan1.add(pan2);
 		pan1.add(pan3);
 		pan2.setBackground(new Color(200,200,200));

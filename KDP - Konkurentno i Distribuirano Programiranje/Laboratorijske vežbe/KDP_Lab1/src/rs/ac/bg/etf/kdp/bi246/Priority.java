@@ -6,6 +6,6 @@ public interface Priority extends Comparable<Priority>
 	public static final long HIGH_PRIORITY = 1000;
 
 	public void setPriority(long priority);
-
+	public int compareTo(Priority o);
 	public long getPriority();
 }

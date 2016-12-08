@@ -1,5 +1,6 @@
 package rs.ac.bg.etf.kdp.bi246;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class ListMessageBox<T> implements MessageBox<T>
 	}
 
 	@Override
-	public synchronized void send(Message<T> msg, Priority prior, long timeToLive)
+	public synchronized void send(Message<T> msg, long timeToLive)
 	{
 		update();
 		while (buffer.size() == cap)
@@ -34,6 +35,7 @@ public class ListMessageBox<T> implements MessageBox<T>
 		msg.setTTL(timeToLive);
 		msg.setTimeSent(System.currentTimeMillis());
 		buffer.add(msg);
+		Collections.sort(buffer);
 	}
 
 	@Override
