@@ -55,9 +55,18 @@ public class Put extends JFrame
 					{
 						Message<String> msg = new TextMessage();
 						msg.setBody(txt.getText());
-						buffer.send(msg, null, Long.parseLong(ttl.getText()));
-						txtlabel.setText("");
-						ttllabel.setText("");
+						long longttl;
+						try
+						{
+							longttl = Long.parseLong(ttl.getText());
+						} catch (NumberFormatException e)
+						{
+							longttl = 0;
+						}
+						msg.setTTL(longttl);
+						buffer.send(msg, null, longttl);
+						txt.setText("");
+						ttl.setText("");
 					}
 				};
 				t.start();

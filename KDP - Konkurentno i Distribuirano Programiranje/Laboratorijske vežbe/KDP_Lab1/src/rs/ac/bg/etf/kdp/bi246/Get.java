@@ -1,7 +1,6 @@
 
 package rs.ac.bg.etf.kdp.bi246;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -33,14 +32,15 @@ public class Get extends JFrame
 		this.ttl = new JTextArea();
 		this.txtlabel = new JLabel("Message output");
 		this.ttllabel = new JLabel("Time To Wait");
-		
-		btn.setPreferredSize(new Dimension(150,50));
+
+		btn.setPreferredSize(new Dimension(150, 50));
+		txt.setEditable(false);
 		
 		txtlabel.setOpaque(true);
 		txtlabel.setBackground(Color.white);
 		txtlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		txtlabel.setPreferredSize(new Dimension(100, 25));
-		
+
 		ttllabel.setOpaque(true);
 		ttllabel.setBackground(Color.white);
 		ttllabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -54,8 +54,18 @@ public class Get extends JFrame
 				{
 					public void run()
 					{
-						Message<String> msg = buffer.receive(Long.parseLong(ttl.getText()), null);
+						long longttl;
+						try
+						{
+							longttl = Long.parseLong(ttl.getText());
+						} catch (NumberFormatException e)
+						{
+							longttl = 0;
+						}
+
+						Message<String> msg = buffer.receive(longttl, null);
 						txt.setText(msg.getBody());
+						ttl.setText("");
 					}
 				};
 				t.start();
@@ -64,18 +74,18 @@ public class Get extends JFrame
 		});
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new GridLayout(2,1));
+		this.setLayout(new GridLayout(2, 1));
 		this.setBounds(700, 400, 300, 300);
 		JPanel pan1 = new JPanel();
-		pan1.setLayout(new GridLayout(2,1));
+		pan1.setLayout(new GridLayout(2, 1));
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
 		JPanel pan4 = new JPanel();
-		pan2.setLayout(new FlowLayout(FlowLayout.CENTER,15,30));
-		GridLayout gridL = new GridLayout(1,2);
+		pan2.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 30));
+		GridLayout gridL = new GridLayout(1, 2);
 		gridL.setHgap(15);
 		pan3.setLayout(gridL);
-		pan4.setLayout(new FlowLayout(FlowLayout.CENTER,0,70));
+		pan4.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
 		pan4.add(btn);
 		this.add(pan4);
 		pan2.add(txtlabel);
@@ -86,13 +96,11 @@ public class Get extends JFrame
 
 		pan1.add(pan2);
 		pan1.add(pan3);
-		pan2.setBackground(new Color(200,200,200));
-		pan3.setBackground(new Color(200,200,200));
-		pan4.setBackground(new Color(200,200,200));
+		pan2.setBackground(new Color(200, 200, 200));
+		pan3.setBackground(new Color(200, 200, 200));
+		pan4.setBackground(new Color(200, 200, 200));
 		this.add(pan1);
 		this.setVisible(true);
 	}
 
-
 }
-
