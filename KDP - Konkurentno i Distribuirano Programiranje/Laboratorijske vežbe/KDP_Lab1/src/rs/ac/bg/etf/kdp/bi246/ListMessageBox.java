@@ -19,6 +19,7 @@ public class ListMessageBox<T> implements MessageBox<T>
 	@Override
 	public synchronized void send(Message<T> msg, Priority prior, long timeToLive)
 	{
+		update();
 		while (buffer.size() == cap)
 		{
 			try
@@ -38,6 +39,7 @@ public class ListMessageBox<T> implements MessageBox<T>
 	@Override
 	public synchronized Message<T> receive(long timeToWait, Status status)
 	{
+		update();
 		Message<T> msg = null;
 		long requestTime = System.currentTimeMillis();
 		while (buffer.size() == 0)
@@ -51,7 +53,10 @@ public class ListMessageBox<T> implements MessageBox<T>
 					// TODO status
 				}
 				long waitFor = (timeToWait + requestTime) - currTime;
-				wait(waitFor);
+				if (waitFor > 0)
+					wait(waitFor);
+				else
+					wait();
 			} catch (Exception e)
 			{
 				e.printStackTrace();

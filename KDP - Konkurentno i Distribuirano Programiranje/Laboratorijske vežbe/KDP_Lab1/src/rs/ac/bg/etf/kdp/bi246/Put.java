@@ -65,9 +65,9 @@ public class Put extends JFrame
 							longttl = 0;
 						}
 						msg.setTTL(longttl);
-						buffer.send(msg, null, longttl);
 						txt.setText("");
 						ttl.setText("");
+						buffer.send(msg, null, longttl);
 					}
 				};
 				t.start();
